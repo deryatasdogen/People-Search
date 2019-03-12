@@ -27,8 +27,6 @@ namespace PeopleSearch
                 return null;
 
             return Answers[questionRoot];
-
-            return null;
         }
 
         public void AskQuestion()
