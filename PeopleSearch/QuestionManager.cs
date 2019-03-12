@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PeopleSearch
 {
@@ -11,18 +12,23 @@ namespace PeopleSearch
         public QuestionManager()
         {
             Answers = new Dictionary<string, string>();
-            Answers.Add("Kütüphanede kaç adet kitap vardır?", "28765");
-            Answers.Add("Kütüphanede kaç tür kitap vardır?", "22");
-            Answers.Add("Harry Potterın yazarı kimdir?", "J. K. Rowling");
-            Answers.Add("Harry Potter ne tür bir romandır?", "Fantastik Kurgu");
+            Answers.Add("Albert Einstein", "Cool guy");
+            Answers.Add("Lacuna Coil", "Cool band");
+            Answers.Add("Within Temptation", "Cooler band");
+            Answers.Add("Harry Potter", "⚡");
         }
 
         public string GiveAnswer(string question)
         {
-            if (!Answers.ContainsKey(question))
+            Regex regex = new Regex(@"^(Who is|What is|Where is)\s+");
+            string questionRoot = regex.Replace(question, "");
+
+            if (!Answers.ContainsKey(questionRoot))
                 return null;
 
-            return Answers[question];
+            return Answers[questionRoot];
+
+            return null;
         }
 
         public void AskQuestion()
